@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  Weather
+//  WeatherTest
 //
-//  Created by Pavel N on 11/18/19.
+//  Created by Pavel N on 11/20/19.
 //  Copyright © 2019 Pavel N. All rights reserved.
 //
 
@@ -10,6 +10,8 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+
+
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
