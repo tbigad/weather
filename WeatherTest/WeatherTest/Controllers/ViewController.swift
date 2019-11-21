@@ -22,6 +22,9 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib.init(nibName: "WeekWeatherTableViewCell", bundle: nil), forCellReuseIdentifier: WeekWeatherTableViewCell.reuseIdentifier)
+        tableView.register(UINib.init(nibName: "DailyDitailsTableViewCell", bundle: nil), forCellReuseIdentifier: DailyDitailsTableViewCell.reuseIdentifier)
+        tableView.register(UINib.init(nibName: "WeatherDitailsTableViewCell", bundle: nil), forCellReuseIdentifier: WeatherDitailsTableViewCell.reuseIdentifier)
+        
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(UINib.init(nibName: "HourlyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: HourlyCollectionViewCell.reuseIdentifier)
@@ -60,10 +63,15 @@ extension ViewController:UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: WeekWeatherTableViewCell.reuseIdentifier, for: indexPath)
             // Configure the cell
             return cell
+        } else if indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: WeatherDitailsTableViewCell.reuseIdentifier, for: indexPath)
+            // Configure the cell
+            return cell
         } else {
-            
+            let cell = tableView.dequeueReusableCell(withIdentifier: DailyDitailsTableViewCell.reuseIdentifier, for: indexPath)
+            // Configure the cell
+            return cell
         }
-        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
