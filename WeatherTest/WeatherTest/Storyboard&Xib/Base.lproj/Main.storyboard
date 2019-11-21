@@ -87,6 +87,9 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="B4c-o2-8CM" id="hCN-LG-HMa"/>
+                        <outlet property="currentCityLabel" destination="xNy-3Y-9Un" id="Nrp-Ro-Q1n"/>
+                        <outlet property="currentTemperuteLabel" destination="KfQ-9z-dDk" id="HMZ-z6-6er"/>
+                        <outlet property="currentWeatherStateLabel" destination="rwf-FP-jVK" id="Pzl-gL-0b4"/>
                         <outlet property="tableView" destination="Y8f-0A-9UW" id="sqU-e8-Red"/>
                     </connections>
                 </viewController>

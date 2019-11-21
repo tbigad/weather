@@ -8,17 +8,20 @@
 
 import UIKit
 
-class DailyDitailsTableViewCell: UITableViewCell {
+class DailyDitailsTableViewCell: BaseTableViewCell {
     static let reuseIdentifier:String = "DailyDitailsTableViewCell"
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    @IBOutlet var variableNameLabel: UILabel!
+    @IBOutlet var valueLabel: UILabel!
+    
+    override func cellPreffiredSize() -> CGFloat {
+        return 60
     }
     
+    func bindData(_ data: WeatherDitail){
+        variableNameLabel.text = data.name
+        guard let value = data.value, let postfix = data.postfix else {
+            return
+        }
+        valueLabel.text = "\(value) \(postfix)"
+    }
 }

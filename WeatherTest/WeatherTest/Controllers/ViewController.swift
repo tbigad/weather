@@ -13,7 +13,11 @@ class ViewController: UIViewController {
     let locationHelper = LocationHelper()
     @IBOutlet var tableView: UITableView!
     @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var currentTemperuteLabel: UILabel!
+    @IBOutlet var currentWeatherStateLabel: UILabel!
+    @IBOutlet var currentCityLabel: UILabel!
     private var commonQueue:OperationQueue?
+    private var weatherData:WeatherData = WeatherData()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +37,37 @@ class ViewController: UIViewController {
     func updateBackendData(_ lat:Double, _ lon:Double) {
         commonQueue = OperationQueue()
         let operation = GetWeatherAsyncOperation(lon: lon, lat: lat)
+        operation.completionBlock = {
+            [weak operation , weak self] in
+            guard let op = operation else {
+                return
+            }
+            switch op.result {
+            case .succes:
+                guard let curr = op.currentResult, let hour = op.hourlyResult else {
+                    return
+                }
+                self?.weatherData.parseBackendData(curr, hour)
+                DispatchQueue.main.async {
+                    self?.updateHeaderInfo()
+                    self?.tableView.reloadData()
+                }
+            case .failed(let errorString):
+                self?.showAlertMessage(title: "error", message: errorString, handle: {})
+            case .none:
+                break
+            }
+        }
         commonQueue?.addOperation(operation)
+    }
+    func updateHeaderInfo() {
+        if (weatherData.currentWeather == nil) {
+            return
+        }
+        currentCityLabel.text = weatherData.currentWeather?.cityName
+        currentTemperuteLabel.text = "\(weatherData.currentWeather?.temperature ?? 256)"
+        currentWeatherStateLabel.text = weatherData.currentWeather?.clouds
+        collectionView.reloadData()
     }
 }
 
@@ -45,17 +79,16 @@ extension ViewController:LocationHelperDelegate{
 
 extension ViewController:UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            return 150
-        } else {
+        guard let cell = tableView.cellForRow(at: indexPath) as? BaseTableViewCell else {
             return 48
         }
+        return cell.cellPreffiredSize()
     }
 }
 
 extension ViewController:UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return weatherData.ditails.count + 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -68,8 +101,8 @@ extension ViewController:UITableViewDataSource {
             // Configure the cell
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: DailyDitailsTableViewCell.reuseIdentifier, for: indexPath)
-            // Configure the cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: DailyDitailsTableViewCell.reuseIdentifier, for: indexPath) as! DailyDitailsTableViewCell
+            cell.bindData(weatherData.ditails[indexPath.row - 2])
             return cell
         }
     }
@@ -82,12 +115,12 @@ extension ViewController:UITableViewDataSource {
 
 extension ViewController:UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return weatherData.events.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyCollectionViewCell.reuseIdentifier, for: indexPath)
-        // Configure the cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyCollectionViewCell.reuseIdentifier, for: indexPath) as! HourlyCollectionViewCell
+        cell.bindData(weatherData.events[indexPath.row])
         return cell
     }
     

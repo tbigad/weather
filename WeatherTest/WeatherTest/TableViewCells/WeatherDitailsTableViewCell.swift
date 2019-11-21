@@ -8,17 +8,10 @@
 
 import UIKit
 
-class WeatherDitailsTableViewCell: UITableViewCell {
+class WeatherDitailsTableViewCell: BaseTableViewCell {
     static let reuseIdentifier:String = "WeatherDitailsTableViewCell"
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    @IBOutlet var ditaledWeatherText: UILabel!
+    override func cellPreffiredSize() -> CGFloat {
+        return 150;
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
 }

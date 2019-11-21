@@ -46,6 +46,11 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="174" height="182"/>
+            <connections>
+                <outlet property="icon" destination="zNS-Qj-o9v" id="HGw-To-jN1"/>
+                <outlet property="temperature" destination="ry3-nI-Rlv" id="bHZ-dF-5VC"/>
+                <outlet property="time" destination="QNt-b3-jun" id="WHm-g6-Fkj"/>
+            </connections>
             <point key="canvasLocation" x="221.73913043478262" y="197.54464285714286"/>
         </collectionViewCell>
     </objects>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WeekWeatherTableViewCell: UITableViewCell {
+class WeekWeatherTableViewCell: BaseTableViewCell {
     
     static let reuseIdentifier = "WeekWeatherTableViewCell"
     @IBOutlet var collectionView: UICollectionView!
@@ -23,13 +23,10 @@ class WeekWeatherTableViewCell: UITableViewCell {
         collectionView.register(UINib.init(nibName: "NextWeekWeatherCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: NextWeekWeatherCollectionViewCell.reuseIdentifier)
         
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
     
+    override func cellPreffiredSize() -> CGFloat {
+        return 300
+    }
 }
 
 extension WeekWeatherTableViewCell: UICollectionViewDelegate {

@@ -47,7 +47,6 @@ class HourlyForecastBackendOperation: BaseBackendOperation {
         
         var request = URLRequest(url: url)
         request.timeoutInterval = 10
-        print(url.absoluteString)
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
             if let error = error {
@@ -55,10 +54,17 @@ class HourlyForecastBackendOperation: BaseBackendOperation {
                 self.fail()
             }
             guard let data = data else {return;}
-            
-            let decodeResult: (decodableObj: HourlyWeatherData?, error: Error?) = CodableHelper.decode(HourlyWeatherData.self, from: data)
-            guard let weatherData = decodeResult.decodableObj else { return; }
-            self.result = .succes(data: weatherData)
+            let decoder = JSONDecoder()
+            var decodeError:Error?
+            let decodeResul:HourlyWeatherData?
+            do {
+                decodeResul = try decoder.decode(HourlyWeatherData.self, from: data)
+            } catch {
+                decodeError = error
+                print(decodeError.debugDescription)
+                self.result = .error(decodeError!.localizedDescription); self.fail(); return;
+            }
+            self.result = .succes(data: decodeResul!)
             self.succes()
         }
         task.resume()

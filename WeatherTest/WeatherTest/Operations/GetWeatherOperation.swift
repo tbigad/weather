@@ -20,6 +20,8 @@ class GetWeatherAsyncOperation: AsyncOperation {
     private var backendOperation:OperationQueue?
     fileprivate var lon:Double?
     fileprivate var lat:Double?
+    var currentResult:CurrentWeatherData?
+    var hourlyResult:HourlyWeatherData?
     
     init(lon:Double, lat:Double) {
         super.init()
@@ -28,6 +30,7 @@ class GetWeatherAsyncOperation: AsyncOperation {
     }
     override func main() {
         getWeatherData()
+        finish()
     }
     
     func getWeatherData() {
@@ -36,17 +39,13 @@ class GetWeatherAsyncOperation: AsyncOperation {
         currentWeatherBackendOperation = CurrentWeatherBackendOperation(lon!,lat!)
         hourlyForecastBackendOperation = HourlyForecastBackendOperation(lon!,lat!)
         
-        addDependency(currentWeatherBackendOperation!)
-        addDependency(hourlyForecastBackendOperation!)
         hourlyForecastBackendOperation!.completionBlock = {
             [weak self, weak hourlyForecastBackendOperation] in
                 switch hourlyForecastBackendOperation!.result! {
                 case .error(let str):
                     self?.result = .failed(errorString: str)
                 case .succes(let data):
-                    let d = data
-                @unknown default:
-                    break
+                    self?.hourlyResult = data
             }
         }
         
@@ -55,13 +54,18 @@ class GetWeatherAsyncOperation: AsyncOperation {
             switch currentWeatherBackendOperation!.result! {
                 case .error(let str):
                     self?.result = .failed(errorString: str)
+                    return;
                 case .succes(let data):
-                    let d = data
-                @unknown default:
-                    break
+                    self?.currentResult = data
             }
         }
         
+        addDependency(currentWeatherBackendOperation!)
+        addDependency(hourlyForecastBackendOperation!)
         backendOperation!.addOperations([hourlyForecastBackendOperation!, currentWeatherBackendOperation!], waitUntilFinished: true)
+        if result == nil
+        {
+            result = .succes
+        }
     }
 }

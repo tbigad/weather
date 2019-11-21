@@ -7,57 +7,51 @@ import Foundation
 
 // MARK: - HourlyWeatherData
 struct HourlyWeatherData: Codable {
-    let cod: String?
-    let message, cnt: Int?
-    let list: [ListHourly]?
-    let city: City?
+    let cod: String
+    let message: Double
+    let cnt: Int
+    let list: [ListHourly]
+    let city: City
 }
 
 // MARK: - City
 struct City: Codable {
-    let id: Int?
-    let name: String?
-    let coord: CoordHourly?
-    let country: String?
-    let population, timezone, sunrise, sunset: Int?
+    let id: Int
+    let name: String
+    let coord: Coord
+    let country: String
 }
 
 // MARK: - Coord
 struct CoordHourly: Codable {
-    let lat, lon: Double?
+    let lat, lon: Double
 }
 
 // MARK: - List
 struct ListHourly: Codable {
-    let dt: Int?
-    let main: MainClass?
-    let weather: [WeatherHourly]?
-    let clouds: CloudsHourly?
-    let wind: WindHourly?
-    let dtTxt: String?
-    let rain: Rain?
+    let dt: Int
+    let main: MainClassHourly
+    let weather: [WeatherHourly]
+    let clouds: CloudsHourly
+    let wind: WindHourly
+    let dtTxt: String
 
     enum CodingKeys: String, CodingKey {
-        case dt
-        case main
-        case weather
-        case clouds
-        case wind
+        case dt, main, weather, clouds, wind
         case dtTxt = "dt_txt"
-        case rain
     }
 }
 
 // MARK: - Clouds
 struct CloudsHourly: Codable {
-    let all: Int?
+    let all: Int
 }
 
 // MARK: - MainClass
-struct MainClass: Codable {
-    let temp, tempMin, tempMax: Double?
-    let pressure, seaLevel, grndLevel, humidity: Int?
-    let tempKf: Double?
+struct MainClassHourly: Codable {
+    let temp, tempMin, tempMax, pressure: Double
+    let seaLevel, grndLevel: Double
+    let humidity: Int
 
     enum CodingKeys: String, CodingKey {
         case temp
@@ -67,31 +61,15 @@ struct MainClass: Codable {
         case seaLevel = "sea_level"
         case grndLevel = "grnd_level"
         case humidity
-        case tempKf = "temp_kf"
     }
-}
-
-// MARK: - Rain
-struct Rain: Codable {
-    let the3H: Double?
-
-    enum CodingKeys: String, CodingKey {
-        case the3H = "3h"
-    }
-}
-
-
-enum Pod: String, Codable {
-    case d = "d"
-    case n = "n"
 }
 
 // MARK: - Weather
 struct WeatherHourly: Codable {
-    let id: Int?
-    let main: MainEnum?
-    let weatherDescription: Description?
-    let icon: String?
+    let id: Int
+    let main: String
+    let weatherDescription: String
+    let icon: String
 
     enum CodingKeys: String, CodingKey {
         case id, main
@@ -100,23 +78,7 @@ struct WeatherHourly: Codable {
     }
 }
 
-enum MainEnum: String, Codable {
-    case clear = "Clear"
-    case clouds = "Clouds"
-    case rain = "Rain"
-}
-
-enum Description: String, Codable {
-    case brokenClouds = "broken clouds"
-    case clearSky = "clear sky"
-    case fewClouds = "few clouds"
-    case lightRain = "light rain"
-    case overcastClouds = "overcast clouds"
-    case scatteredClouds = "scattered clouds"
-}
-
 // MARK: - Wind
 struct WindHourly: Codable {
-    let speed: Double?
-    let deg: Int?
+    let speed, deg: Double
 }

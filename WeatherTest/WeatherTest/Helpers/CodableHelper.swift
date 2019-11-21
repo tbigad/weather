@@ -17,7 +17,6 @@ open class CodableHelper {
         var returnedError: Error? = nil
 
         let decoder = JSONDecoder()
-        decoder.dataDecodingStrategy = .base64
         decoder.dateDecodingStrategy = .iso8601
 
         do {

@@ -32,6 +32,9 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="ditaledWeatherText" destination="8GU-qq-IFF" id="ozh-2x-EZM"/>
+            </connections>
             <point key="canvasLocation" x="180.43478260869566" y="153.68303571428569"/>
         </tableViewCell>
     </objects>
