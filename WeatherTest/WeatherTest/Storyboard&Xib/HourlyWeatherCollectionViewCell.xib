@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HourlyWeatherCollectionViewCell" customModule="WeatherTest" customModuleProvider="target">
+            <connections>
+                <outlet property="tempLabel" destination="x3e-ON-ZNx" id="Etn-WD-DkG"/>
+                <outlet property="timeLabel" destination="FJV-dk-TRE" id="a6K-1v-wSF"/>
+                <outlet property="weatherImage" destination="nEz-ER-lbg" id="0Ob-8f-VhU"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="HourlyWeatherCollectionViewCell" customModule="WeatherTest" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="75" height="130"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="75" height="130"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MrS-As-Dqs">
+                        <rect key="frame" x="0.0" y="0.0" width="75" height="130"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4pm" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJV-dk-TRE">
+                                <rect key="frame" x="0.0" y="0.0" width="75" height="26.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nEz-ER-lbg">
+                                <rect key="frame" x="0.0" y="26.5" width="75" height="77"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9c" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x3e-ON-ZNx">
+                                <rect key="frame" x="0.0" y="103.5" width="75" height="26.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="MrS-As-Dqs" secondAttribute="bottom" id="1vh-fc-AUd"/>
+                <constraint firstItem="MrS-As-Dqs" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ejZ-8n-K3U"/>
+                <constraint firstAttribute="trailing" secondItem="MrS-As-Dqs" secondAttribute="trailing" id="kw9-qV-jeG"/>
+                <constraint firstItem="MrS-As-Dqs" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="nst-e0-vkR"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="114" height="91"/>
+            <point key="canvasLocation" x="174.63768115942031" y="133.25892857142856"/>
+        </collectionViewCell>
+    </objects>
+</document>

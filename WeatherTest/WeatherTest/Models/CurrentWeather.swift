@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct CurrentWeather {
-    let cityName:String?
-    
+class CurrentWeather {
+    var cityName:String?
+    var temperature:Int?
+    var clouds:String? 
 }
