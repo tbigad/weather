@@ -90,7 +90,9 @@
                         <outlet property="currentCityLabel" destination="xNy-3Y-9Un" id="Nrp-Ro-Q1n"/>
                         <outlet property="currentTemperuteLabel" destination="KfQ-9z-dDk" id="HMZ-z6-6er"/>
                         <outlet property="currentWeatherStateLabel" destination="rwf-FP-jVK" id="Pzl-gL-0b4"/>
+                        <outlet property="headerHeightConstraint" destination="6dj-X2-Mej" id="nQO-42-2RT"/>
                         <outlet property="tableView" destination="Y8f-0A-9UW" id="sqU-e8-Red"/>
+                        <outlet property="titleTopConstraint" destination="58g-g9-xms" id="0WY-A3-nYv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

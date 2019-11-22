@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8GU-qq-IFF">
-                        <rect key="frame" x="0.0" y="0.0" width="389" height="145"/>
+                        <rect key="frame" x="16" y="0.0" width="357" height="145"/>
                         <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
@@ -27,8 +27,8 @@
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="8GU-qq-IFF" secondAttribute="bottom" id="Hk9-UQ-ebT"/>
                     <constraint firstItem="8GU-qq-IFF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="q8K-2p-1BG"/>
-                    <constraint firstItem="8GU-qq-IFF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="rK1-xb-VlV"/>
-                    <constraint firstAttribute="trailing" secondItem="8GU-qq-IFF" secondAttribute="trailing" id="wnR-ea-B5U"/>
+                    <constraint firstItem="8GU-qq-IFF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="rK1-xb-VlV"/>
+                    <constraint firstAttribute="trailing" secondItem="8GU-qq-IFF" secondAttribute="trailing" constant="16" id="wnR-ea-B5U"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

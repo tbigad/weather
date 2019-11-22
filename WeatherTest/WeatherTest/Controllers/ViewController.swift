@@ -10,14 +10,24 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let locationHelper = LocationHelper()
+    private let locationHelper = LocationHelper()
+    
     @IBOutlet var tableView: UITableView!
     @IBOutlet var collectionView: UICollectionView!
+    
     @IBOutlet var currentTemperuteLabel: UILabel!
     @IBOutlet var currentWeatherStateLabel: UILabel!
     @IBOutlet var currentCityLabel: UILabel!
+    
+    @IBOutlet var headerHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var titleTopConstraint: NSLayoutConstraint!
+    
     private var commonQueue:OperationQueue?
     private var weatherData:WeatherData = WeatherData()
+    private let maxHeaderHeight: CGFloat = 250
+    private let minHeaderHeight: CGFloat = 100
+    private var previousScrollOffset: CGFloat = 0
+    private var previousScrollViewHeight: CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +42,14 @@ class ViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(UINib.init(nibName: "HourlyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: HourlyCollectionViewCell.reuseIdentifier)
+        
+        self.previousScrollViewHeight = self.tableView.contentSize.height
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.headerHeightConstraint.constant = self.maxHeaderHeight
+        self.updateHeader()
     }
 
     func updateBackendData(_ lat:Double, _ lon:Double) {
@@ -79,10 +97,100 @@ extension ViewController:LocationHelperDelegate{
 
 extension ViewController:UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let cell = tableView.cellForRow(at: indexPath) as? BaseTableViewCell else {
-            return 48
+        return UITableView.automaticDimension;
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        defer {
+            self.previousScrollViewHeight = scrollView.contentSize.height
+            self.previousScrollOffset = scrollView.contentOffset.y
         }
-        return cell.cellPreffiredSize()
+
+        let heightDiff = scrollView.contentSize.height - self.previousScrollViewHeight
+        let scrollDiff = (scrollView.contentOffset.y - self.previousScrollOffset)
+
+        guard heightDiff == 0 else { return }
+
+        let absoluteTop: CGFloat = 0;
+        let absoluteBottom: CGFloat = scrollView.contentSize.height - scrollView.frame.size.height;
+
+        let isScrollingDown = scrollDiff > 0 && scrollView.contentOffset.y > absoluteTop
+        let isScrollingUp = scrollDiff < 0 && scrollView.contentOffset.y < absoluteBottom
+
+        if canAnimateHeader(scrollView) {
+            var newHeight = self.headerHeightConstraint.constant
+            if isScrollingDown {
+                newHeight = max(self.minHeaderHeight, self.headerHeightConstraint.constant - abs(scrollDiff))
+            } else if isScrollingUp {
+                newHeight = min(self.maxHeaderHeight, self.headerHeightConstraint.constant + abs(scrollDiff))
+            }
+
+            if newHeight != self.headerHeightConstraint.constant {
+                self.headerHeightConstraint.constant = newHeight
+                self.updateHeader()
+                self.setScrollPosition(self.previousScrollOffset)
+            }
+        }
+    }
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        self.scrollViewDidStopScrolling()
+    }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            self.scrollViewDidStopScrolling()
+        }
+    }
+
+    func scrollViewDidStopScrolling() {
+        let range = self.maxHeaderHeight - self.minHeaderHeight
+        let midPoint = self.minHeaderHeight + (range / 2)
+
+        if self.headerHeightConstraint.constant > midPoint {
+            self.expandHeader()
+        } else {
+            self.collapseHeader()
+        }
+    }
+
+    func canAnimateHeader(_ scrollView: UIScrollView) -> Bool {
+        // Calculate the size of the scrollView when header is collapsed
+        let scrollViewMaxHeight = scrollView.frame.height + self.headerHeightConstraint.constant - minHeaderHeight
+
+        // Make sure that when header is collapsed, there is still room to scroll
+        return scrollView.contentSize.height > scrollViewMaxHeight
+    }
+
+    func collapseHeader() {
+        self.view.layoutIfNeeded()
+        UIView.animate(withDuration: 0.2, animations: {
+            self.headerHeightConstraint.constant = self.minHeaderHeight
+            self.updateHeader()
+            self.view.layoutIfNeeded()
+        })
+    }
+
+    func expandHeader() {
+        self.view.layoutIfNeeded()
+        UIView.animate(withDuration: 0.2, animations: {
+            self.headerHeightConstraint.constant = self.maxHeaderHeight
+            self.updateHeader()
+            self.view.layoutIfNeeded()
+        })
+    }
+
+    func setScrollPosition(_ position: CGFloat) {
+        self.tableView.contentOffset = CGPoint(x: self.tableView.contentOffset.x, y: position)
+    }
+
+    func updateHeader() {
+        let range = self.maxHeaderHeight - self.minHeaderHeight
+        let openAmount = self.headerHeightConstraint.constant - self.minHeaderHeight
+        let percentage = openAmount / range
+
+        //self.titleTopConstraint.constant = -openAmount + 10
+        self.currentTemperuteLabel.alpha = percentage
     }
 }
 

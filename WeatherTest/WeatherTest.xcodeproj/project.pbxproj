@@ -120,10 +120,10 @@
 		F3A6D6762385388900A84DB4 /* WeatherTest */ = {
 			isa = PBXGroup;
 			children = (
+				F3A6D69E2385422900A84DB4 /* CollectionViewCell */,
 				F3763B1C2386E699001AEDCF /* TableViewCells */,
 				F3CC8661238696290037EE28 /* Controllers */,
 				F3A6D6A323855ACA00A84DB4 /* Models */,
-				F3A6D69E2385422900A84DB4 /* CollectionViewCell */,
 				F3A6D69D238541A200A84DB4 /* Storyboard&Xib */,
 				F3A6D69A2385393200A84DB4 /* Helpers */,
 				F3A6D68B2385390F00A84DB4 /* Operations */,

@@ -36,7 +36,7 @@ class WeatherData {
         ditails.removeAll()
         
         let formatter = DateFormatter()
-        formatter.dateFormat = "hh a"
+        formatter.dateFormat = "hh:mm a"
         let sunrise = formatter.string(from: Date(timeIntervalSince1970: Double(current.sys!.sunrise!)))
         let sunset = formatter.string(from: Date(timeIntervalSince1970: Double(current.sys!.sunset!)))
         

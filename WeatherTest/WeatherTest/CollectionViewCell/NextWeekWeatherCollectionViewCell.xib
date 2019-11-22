@@ -17,13 +17,13 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wensday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvl-2w-kIC">
-                        <rect key="frame" x="20" y="10" width="71" height="21"/>
+                        <rect key="frame" x="16" y="10" width="70.5" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZgR-uh-a43">
-                        <rect key="frame" x="111" y="0.0" width="186" height="41"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloud.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ZgR-uh-a43">
+                        <rect key="frame" x="193" y="3" width="22" height="35.5"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cUY-q8-K35">
                         <rect key="frame" x="389.5" y="10" width="10.5" height="21"/>
@@ -45,16 +45,18 @@
                 <constraint firstItem="ZgR-uh-a43" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="TV3-t6-rDd"/>
                 <constraint firstAttribute="bottom" secondItem="ZgR-uh-a43" secondAttribute="bottom" id="YFx-DA-rNP"/>
                 <constraint firstItem="cUY-q8-K35" firstAttribute="leading" secondItem="OcP-gm-PHS" secondAttribute="trailing" constant="3" id="cVD-Cr-6D7"/>
-                <constraint firstItem="tvl-2w-kIC" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="fU2-on-5ni"/>
+                <constraint firstItem="tvl-2w-kIC" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="fU2-on-5ni"/>
                 <constraint firstItem="OcP-gm-PHS" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="kpr-dS-s6e"/>
                 <constraint firstItem="cUY-q8-K35" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="q80-GA-uKU"/>
                 <constraint firstAttribute="trailing" secondItem="cUY-q8-K35" secondAttribute="trailing" constant="8" id="uiB-WG-94d"/>
                 <constraint firstItem="tvl-2w-kIC" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="we7-yu-fpf"/>
-                <constraint firstItem="ZgR-uh-a43" firstAttribute="leading" secondItem="tvl-2w-kIC" secondAttribute="trailing" constant="20" id="wwj-DP-036"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="408" height="41"/>
             <point key="canvasLocation" x="391.304347826087" y="117.52232142857142"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="cloud.fill" catalog="system" width="64" height="42"/>
+    </resources>
 </document>
