@@ -84,7 +84,7 @@ class ViewController: UIViewController {
             return
         }
         currentCityLabel.text = weatherData.currentWeather?.cityName
-        currentTemperuteLabel.text = "\(weatherData.currentWeather?.temperature ?? 256)"
+        currentTemperuteLabel.text = "\(weatherData.currentWeather?.temperature ?? 256)°"
         currentWeatherStateLabel.text = weatherData.currentWeather?.clouds
         collectionView.reloadData()
     }

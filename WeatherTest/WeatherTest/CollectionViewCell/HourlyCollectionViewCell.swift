@@ -24,7 +24,7 @@ class HourlyCollectionViewCell: UICollectionViewCell {
         formatter.dateFormat = "hh a"
         let hourString = formatter.string(from: event.time)
         time.text = hourString
-        temperature.text = String(event.temp)
+        temperature.text = "\(String(event.temp)) °"
         icon.image = UIImage(systemName: "cloud")
     }
 }
