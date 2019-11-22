@@ -32,5 +32,13 @@ struct WeatherDitail {
     let postfix:String?
 }
 
+struct DayOverview {
+    let nameOfDay:String
+    let minTemp:Int
+    let maxTemp:Int
+    let iconName:String
+}
+
+typealias DaysOverview = [DayOverview]
 typealias WeatherDitails = [WeatherDitail]
 typealias Events = [HourlyEvent]

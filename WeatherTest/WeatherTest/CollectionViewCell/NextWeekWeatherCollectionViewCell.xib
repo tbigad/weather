@@ -28,7 +28,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cUY-q8-K35">
                         <rect key="frame" x="389.5" y="10" width="10.5" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="6" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OcP-gm-PHS">
@@ -53,6 +53,11 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="408" height="41"/>
+            <connections>
+                <outlet property="dayMaxTempLabel" destination="OcP-gm-PHS" id="5RQ-V6-J2N"/>
+                <outlet property="dayMinTempLabel" destination="cUY-q8-K35" id="Nuw-ph-33q"/>
+                <outlet property="nameOfDayLabel" destination="tvl-2w-kIC" id="2xQ-0K-owJ"/>
+            </connections>
             <point key="canvasLocation" x="391.304347826087" y="117.52232142857142"/>
         </collectionViewCell>
     </objects>

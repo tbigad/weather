@@ -33,6 +33,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         locationHelper.delegate = self
         // Do any additional setup after loading the view.
+        tableView.allowsSelection = false
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib.init(nibName: "WeekWeatherTableViewCell", bundle: nil), forCellReuseIdentifier: WeekWeatherTableViewCell.reuseIdentifier)
@@ -97,7 +98,11 @@ extension ViewController:LocationHelperDelegate{
 
 extension ViewController:UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension;
+        if indexPath.row == 0 {
+            return 300
+        } else {
+            return UITableView.automaticDimension;
+        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -201,12 +206,11 @@ extension ViewController:UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: WeekWeatherTableViewCell.reuseIdentifier, for: indexPath)
-            // Configure the cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: WeekWeatherTableViewCell.reuseIdentifier, for: indexPath) as! WeekWeatherTableViewCell
+            cell.bindData(weatherData.daysOverview)
             return cell
         } else if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: WeatherDitailsTableViewCell.reuseIdentifier, for: indexPath)
-            // Configure the cell
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: DailyDitailsTableViewCell.reuseIdentifier, for: indexPath) as! DailyDitailsTableViewCell

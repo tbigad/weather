@@ -12,8 +12,10 @@ class WeatherData {
     var currentWeather:CurrentWeather?
     var events:Events = []
     var ditails:WeatherDitails = []
+    var daysOverview:DaysOverview = []
     
     func parseBackendData(_ current:CurrentWeatherData, _ hourly:HourlyWeatherData) {
+        //header weather
         let cityName = current.name
         let temperature = Int((current.main?.temp)!)
         let clouds = current.weather?.first?.weatherDescription
@@ -25,7 +27,7 @@ class WeatherData {
                                              temperature: temperature, clouds: clouds, date: date,
                                              timeZone: timeZone,
                                              temp_min: temp_min, temp_max: temp_max)
-        
+        //3h weather
         events.removeAll()
         let twentyFourHours = Int((currentWeather?.date!.addingTimeInterval(86400).timeIntervalSince1970)!)
         let filtered = hourly.list.filter({ return $0.dt <  twentyFourHours })
@@ -33,6 +35,7 @@ class WeatherData {
             events.append(HourlyEvent(time: Date(timeIntervalSince1970: Double(item.dt)), timeZone: TimeZone(secondsFromGMT: current.timezone!)!, iconName: item.weather.first?.icon, temp: Int(item.main.temp)))
         }
         
+        //Ditails table
         ditails.removeAll()
         
         let formatter = DateFormatter()
@@ -45,5 +48,33 @@ class WeatherData {
         self.ditails.append(WeatherDitail(name: "Wind speed", value: String((current.wind?.speed)!), postfix: "meter/sec"))
         self.ditails.append(WeatherDitail(name: "Sunrise", value: sunrise, postfix: ""))
         self.ditails.append(WeatherDitail(name: "Sunset", value: sunset, postfix: ""))
+        
+        //days
+        daysOverview.removeAll()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        
+        var avalibleDays:[String:[ListHourly]] = [:]
+        for item in hourly.list {
+            let date = Date(timeIntervalSince1970:Double(item.dt))
+            let dayStr = String (dateFormatter.string(from: date ).capitalized)
+            
+            if avalibleDays[dayStr] != nil {
+                avalibleDays[dayStr]!.append(item)
+            } else {
+                avalibleDays[dayStr] = [item]
+            }
+        }
+        avalibleDays.removeValue(forKey: String (dateFormatter.string(from: Date()).capitalized))
+        
+        let keys = avalibleDays.keys
+        for key in keys {
+            let values = avalibleDays[key]
+            let maxValue = values?.compactMap({ $0.main.tempMax }).max()
+            let minValue = (values?.compactMap({ $0.main.tempMin }).min())!
+            daysOverview.append(DayOverview(nameOfDay: key, minTemp: Int(minValue), maxTemp: Int(maxValue!), iconName: (values?.first!.weather.first!.icon)!))
+        }
+        print(daysOverview)
+        
     }
 }
