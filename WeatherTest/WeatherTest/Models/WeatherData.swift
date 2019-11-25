@@ -72,7 +72,9 @@ class WeatherData {
             let values = avalibleDays[key]
             let maxValue = ((values?.compactMap({ $0.main.tempMax }).max()!)!) - 273.15
             let minValue = (values?.compactMap({ $0.main.tempMin }).min())! - 273.15
-            daysOverview.append(DayOverview(nameOfDay: key, minTemp: Int(minValue), maxTemp: Int(maxValue), iconName: (values?.first!.weather.first!.icon)!))
+            let midDayIndex = Int(values!.count/2)
+            let midDayValue = values![midDayIndex].weather.first?.icon
+            daysOverview.append(DayOverview(nameOfDay: key, minTemp: Int(minValue), maxTemp: Int(maxValue), iconName: midDayValue! ))
         }
         print(daysOverview)
         
