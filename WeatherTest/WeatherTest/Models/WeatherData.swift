@@ -29,7 +29,7 @@ class WeatherData {
                                              temp_min: temp_min, temp_max: temp_max)
         //3h weather
         events.removeAll()
-        let twentyFourHours = Int((currentWeather?.date.addingTimeInterval(86400).timeIntervalSince1970)!)
+        let twentyFourHours = Int(date.addingTimeInterval(86400).timeIntervalSince1970)
         let filtered = hourly.list.filter({ return $0.dt <  twentyFourHours })
         for item in filtered {
             events.append(HourlyEvent(time: Date(timeIntervalSince1970: Double(item.dt)), timeZone: TimeZone(secondsFromGMT: current.timezone ?? 0) ?? TimeZone.current, iconName: item.weather.first?.icon ?? "", temp: Int(item.main.temp  - 273.15)))
@@ -55,6 +55,7 @@ class WeatherData {
         dateFormatter.dateFormat = "EEEE"
         
         var avalibleDays:[String:[ListHourly]] = [:]
+        var arrayOfWeekDays:[String] = []
         for item in hourly.list {
             let date = Date(timeIntervalSince1970:Double(item.dt))
             let dayStr = String (dateFormatter.string(from: date ).capitalized)
@@ -62,13 +63,13 @@ class WeatherData {
             if avalibleDays[dayStr] != nil {
                 avalibleDays[dayStr]!.append(item)
             } else {
+                arrayOfWeekDays.append(dayStr)
                 avalibleDays[dayStr] = [item]
             }
         }
         avalibleDays.removeValue(forKey: String (dateFormatter.string(from: Date()).capitalized))
         
-        let keys = avalibleDays.keys
-        for key in keys {
+        for key in arrayOfWeekDays {
             guard let values = avalibleDays[key] else { continue }
             let maxValue = (values.compactMap({ $0.main.tempMax }).max() ?? -1) - 273.15
             let minValue = (values.compactMap({ $0.main.tempMin }).min() ?? -1) - 273.15
