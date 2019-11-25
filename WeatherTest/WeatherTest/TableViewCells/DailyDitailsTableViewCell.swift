@@ -19,9 +19,6 @@ class DailyDitailsTableViewCell: BaseTableViewCell {
     
     func bindData(_ data: WeatherDitail){
         variableNameLabel.text = data.name
-        guard let value = data.value, let postfix = data.postfix else {
-            return
-        }
-        valueLabel.text = "\(value) \(postfix)"
+        valueLabel.text = "\(data.value) \(data.postfix)"
     }
 }
