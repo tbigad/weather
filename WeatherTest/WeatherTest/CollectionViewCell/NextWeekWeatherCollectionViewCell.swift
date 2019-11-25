@@ -14,6 +14,7 @@ class NextWeekWeatherCollectionViewCell: UICollectionViewCell {
     @IBOutlet var nameOfDayLabel: UILabel!
     @IBOutlet var dayMaxTempLabel: UILabel!
     @IBOutlet var dayMinTempLabel: UILabel!
+    @IBOutlet var image: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,6 +25,7 @@ class NextWeekWeatherCollectionViewCell: UICollectionViewCell {
         nameOfDayLabel.text = data.nameOfDay
         dayMaxTempLabel.text = String(data.maxTemp)
         dayMinTempLabel.text = String(data.minTemp)
+        image.image = UIImage(named: data.iconName)
     }
 
 }

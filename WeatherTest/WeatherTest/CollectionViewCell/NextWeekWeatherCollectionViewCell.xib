@@ -56,6 +56,7 @@
             <connections>
                 <outlet property="dayMaxTempLabel" destination="OcP-gm-PHS" id="5RQ-V6-J2N"/>
                 <outlet property="dayMinTempLabel" destination="cUY-q8-K35" id="Nuw-ph-33q"/>
+                <outlet property="image" destination="ZgR-uh-a43" id="yxJ-t8-ctZ"/>
                 <outlet property="nameOfDayLabel" destination="tvl-2w-kIC" id="2xQ-0K-owJ"/>
             </connections>
             <point key="canvasLocation" x="391.304347826087" y="117.52232142857142"/>
